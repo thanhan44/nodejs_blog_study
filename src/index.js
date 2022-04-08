@@ -8,11 +8,15 @@ const { engine } = require("express-handlebars");
 const path = require("path");
 
 const route = require("./routes");
+const db = require("./config/db");
+
+// Connect DB
+db.connect();
 
 // __dirname là đường dẫn tới thư mục src
 
 //Static file
-app.use(express.static(path.join(__dirname, "./public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Use middleware
 app.use(express.urlencoded({ extended: true }));
@@ -22,7 +26,7 @@ app.use(express.json());
 //Teamplate engine (handlebar : hbs)
 app.engine(".hbs", engine({ extname: ".hbs" }));
 app.set("view engine", ".hbs");
-app.set("views", path.join(__dirname, "./resources/views"));
+app.set("views", path.join(__dirname, "resources", "views"));
 // console.log(__dirname);
 
 //HTTP logger
